@@ -1,0 +1,95 @@
+.bot {
+    width: 400px;
+    margin: 100px auto;
+}
+
+.bot > h2 {
+    text-align: center;
+}
+
+.bot__messages {
+    color: #656D78;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 10px;
+    border: 1px solid #ccc;
+    height: 300px;
+}
+
+.bot__messages__empty {
+    flex-grow: 2;
+    flex-shrink: 1;
+}
+
+.bot__form {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.bot__form__input {
+    flex-grow: 2;
+    border: 1px solid #ccc;
+    height: 30px;
+    padding: 0 10px;
+}
+
+.bot__form__button {
+    background: #eee;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    padding: 0 10px;
+    border-left: none;
+}
+
+.bot .message-item {
+    display: flex;
+    padding: 5px;
+}
+
+.bot .message-item--received {
+    justify-content: flex-start;
+}
+
+.bot .message-item--sent {
+    justify-content: flex-end;
+}
+
+.bot .message {
+    padding: 10px 15px;
+    font-size: 13px;
+    line-height: 18px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background-color: #E6E9ED;
+}
+
+.bot .message__label {
+    font-weight: 400;
+    opacity: 0.6;
+}
+
+.bot .message__text {
+    font-weight: 400;
+    word-break; break-word;
+}
+
+.bot .inbenta-powered {
+    display: flex;
+    justify-content: center;
+    padding: 8px 0 0 0 ;
+}
+
+.bot .inbenta-powered > a {
+    background-image: url(https://20930-presscdn-pagely.netdna-ssl.com/wp-content/themes/inbenta/img/logo-inbenta.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 32px;
+    height: 8px;
+}
