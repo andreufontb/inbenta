@@ -4,17 +4,12 @@
  * the page.
  */
 
-new Vue({
+var app = new Vue({
     delimiters: ['${', '}'],
     el: '#chatBoot',
     data: {
         message: null,
-        history: [
-            {
-                type: "received",
-                loading: true
-            }
-        ]
+        history: []
     },
 
     /**
@@ -22,7 +17,9 @@ new Vue({
      */
     mounted(){
         axios.get('/chat/history')
-            .then(response => this.history = response.data)
+            .then( function(response){
+                app.history = response.data;
+            })
             .catch(function (error) {
                 console.log(error);
           });
@@ -42,16 +39,24 @@ new Vue({
                     type: "sent",
                     content: this.message
                 }
-
+                
                 //2. Send the message
                 axios.post('/chat', {
                     message: sentMessage.content
-                }).then(response => this.history.push(response.data)).catch(function (error){
+                }).then(function (response){
+                    for (var i=0; i<response.data.length; i++){
+                        app.history.push(response.data[i]);
+                    }
+                }).catch(function (error){
                     console.log(error);
                 });
                 
                 //3. Message "send", put to local history chat
-                this.history.push(sentMessage);
+                if (Object.keys(app.history).length === 0){
+                    app.history = [sentMessage];
+                } else {
+                    app.history.push(sentMessage);
+                }
 
                 //3. Clear the message input text
                 this.message = null;
