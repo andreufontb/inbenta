@@ -12,6 +12,8 @@ $app->register(new TwigServiceProvider(), array(
     'twig.path' => __DIR__ . '/../views'
 ));
 
+$app->register(new Silex\Provider\ValidatorServiceProvider());
+
 $app->register(new Silex\Provider\SessionServiceProvider(), array(
     'session.storage.handler' => null
 ));

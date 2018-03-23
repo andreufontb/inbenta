@@ -9,37 +9,36 @@
 <body>
 
 
-    <div class="bot">
+    <div class="bot" id="chatBoot">
         <h2>{{ title }}</h2>
 
-        <div class="bot__messages">
+        <div class="bot__messages" v-chat-scroll>
             <div class="bot__messages__empty"></div>
 
             <div class="bot__messages_list">
-                <div class="message-item message-item--received">
+                <div class="message-item" v-bind:class="{ 'message-item--sent': message.type == 'sent', 'message-item--received': message.type == 'received' }" v-for="message in history">
                     <div class="message">
-                        <span class="message__label">{{ name }}</span>
-                        <span class="message__text">Hello!</span>
-                    </div>
-                </div>
-
-                <div class="message-item message-item--sent">
-                    <div class="message">
-                        <span class="message__text">{% if message %}{{ message }}{% else %}Example{% endif %}</span>
+                        <span class="message__label" v-if="message.type == 'received'">{{ name }}</span>
+                        <span class="message__text loader" v-if="message.loading == true"></span>
+                        <span class="message__text" v-if="message.loadng != true" v-text="message.content"><!-- ${ message } --></span>
                     </div>
                 </div>
             </div>
+
         </div>
 
-        <form class="bot__form" method="POST">
-            <input class="bot__form__input" type="text" name="message">
-            <button class="bot__form__button" type="button">Send</button>
+        <form class="bot__form" method="POST" v-on:submit.prevent>
+            <input class="bot__form__input" type="text" name="message" v-model="message" @keyup.enter="sentResponse">
+            <button class="bot__form__button" type="button" @click="sentResponse">Send</button>
         </form>
 
         <div class="inbenta-powered">
             <a href="http://www.inbenta.com" target="_blank" class="inbenta-powered__link"></a>
         </div>
     </div>
-
+    <script src="assets/vendor/axios.min.js"></script>
+    <script src="assets/vendor/vue.js"></script>
+    <script src="assets/vendor/vue-chat-scroll.js"></script>
+    <script src="assets/app.js"></script>
 </body>
 </html>
